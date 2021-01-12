@@ -18,18 +18,4 @@ const options = {
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
-  // secret: process.env.SECRET,
-  // callbacks: {
-  //   signIn: async (user, account, profile) => {
-  //     if (
-  //       account.provider === "google" &&
-  //       profile.verified_email === true &&
-  //       profile.email.endsWith("@nerdery.com")
-  //     ) {
-  //       return Promise.resolve(true);
-  //     } else {
-  //       return Promise.resolve(false);
-  //     }
-  //   },
-  // },
 };
