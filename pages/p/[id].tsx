@@ -47,11 +47,12 @@ async function deletePost(id: number): Promise<void> {
 
 const Post: React.FC<PostProps> = (props) => {
   const [session, loading] = useSession();
-  if (loading) {
-    return <div>Authenticating ...</div>;
-  }
+  // if (loading) {
+  //   return <div>Authenticating ...</div>;
+  // }
   const router = useRouter();
   if (router.isFallback) {
+    console.log("fallback");
     return <div>Loading...</div>;
   }
   const userHasValidSession = Boolean(session);
