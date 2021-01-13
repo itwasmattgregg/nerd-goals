@@ -13,7 +13,7 @@ export const getStaticProps: GetStaticProps = async () => {
       },
     },
   });
-  return { props: { feed } };
+  return { props: { feed }, revalidate: 1 };
 };
 
 type Props = {

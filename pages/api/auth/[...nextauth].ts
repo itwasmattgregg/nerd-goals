@@ -8,7 +8,6 @@ const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 export default authHandler;
 
 const options = {
-  debug: true,
   providers: [
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
