@@ -1,13 +1,21 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/Layout";
 import { PostProps } from "../../components/Post";
 import prisma from "../../lib/prisma";
 import { useSession } from "next-auth/client";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export async function getStaticPaths() {
+  const posts = await prisma.post.findMany();
+
+  const paths = posts.map((post) => `/p/${post.id}`);
+
+  return { paths, fallback: true };
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
     where: {
       id: Number(params?.id) || -1,
@@ -41,6 +49,10 @@ const Post: React.FC<PostProps> = (props) => {
   const [session, loading] = useSession();
   if (loading) {
     return <div>Authenticating ...</div>;
+  }
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading...</div>;
   }
   const userHasValidSession = Boolean(session);
   const postBelongsToUser = session?.user?.email === props.author?.email;
