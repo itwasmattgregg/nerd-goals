@@ -1,52 +1,40 @@
 import React from "react";
 import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
-import Post, { PostProps } from "../components/Post";
 import prisma from "../lib/prisma";
+import { User } from "@prisma/client";
+import UserComponent from "../components/User";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const feed = await prisma.post.findMany({
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
-  });
-  return { props: { feed }, revalidate: 1 };
+  const users = await prisma.user.findMany();
+  // const users = usersFromDatabase.map((user) => {
+  //   return {
+  //     ...user,
+  //     createdAt: user.createdAt.toString(),
+  //     updatedAt: user.updatedAt.toString(),
+  //   };
+  // });
+
+  return { props: { users }, revalidate: 1 };
 };
 
 type Props = {
-  feed: PostProps[];
+  users: User[];
 };
 
 const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div className="page">
-        <h1>Public Feed</h1>
+        <h1>List of Users</h1>
         <main>
-          {props.feed.map((post) => (
-            <div key={post.id} className="post">
-              <Post post={post} />
+          {props.users.map((user) => (
+            <div key={user.id}>
+              <UserComponent user={user} />
             </div>
           ))}
         </main>
       </div>
-      <style jsx>{`
-        .post {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .post:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
-        }
-      `}</style>
     </Layout>
   );
 };

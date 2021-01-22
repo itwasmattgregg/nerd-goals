@@ -7,7 +7,7 @@ import "../styles/global.css";
 import "nprogress/nprogress.css";
 
 NProgress.configure({
-  minimum: 0.3,
+  minimum: 0.5,
   easing: "ease",
   speed: 800,
   showSpinner: false,
