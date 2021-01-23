@@ -25,19 +25,18 @@ model Tech {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map(name: "verified_email")
-  image         String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  broadGoal     String?
-  timeToLearn   Int?
-  goals         Goal[]
-  technologies  Tech[]
-  following     User[]    @relation("UserFollows", references: [id])
-  followedBy    User[]    @relation("UserFollows", references: [id])
+  id           String   @id @default(cuid())
+  name         String?
+  email        String?  @unique
+  image        String?
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @updatedAt @map(name: "updated_at")
+  broadGoal    String?
+  timeToLearn  Int?
+  goals        Goal[]
+  technologies Tech[]
+  following    User[]   @relation("UserFollows", references: [id])
+  followedBy   User[]   @relation("UserFollows", references: [id])
 
   @@map(name: "users")
 }
