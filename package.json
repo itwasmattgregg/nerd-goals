@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "2.14.0",
+    "@prisma/client": "2.15.0",
     "@types/react": "^17.0.0",
     "autoprefixer": "^10.2.1",
     "formik": "^2.2.6",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
-    "@prisma/cli": "^2.14.0",
+    "@prisma/cli": "^2.15.0",
     "@types/next-auth": "3.1.14",
     "@types/node": "^14.14.20",
     "babel-plugin-superjson-next": "^0.1.10",

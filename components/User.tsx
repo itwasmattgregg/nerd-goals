@@ -1,8 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import { User as UserModel } from "@prisma/client";
+import { Goal, Tech, User as UserModel } from "@prisma/client";
 
-const User: React.FC<{ user: UserModel }> = ({ user }) => {
+export interface UserProps extends UserModel {
+  technologies?: Tech[];
+  goals?: Goal[];
+}
+
+const User: React.FC<{ user: UserProps }> = ({ user }) => {
   return (
     <Link href={`/user/${user.id}`}>
       <a>

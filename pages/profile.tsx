@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../components/Layout";
-import Router from "next/router";
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import prisma from "../lib/prisma";
 import { User } from "@prisma/client";
+import { getSession } from "next-auth/client";
 
 interface Values {
   name: string;
 }
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await getSession({ req });
+  if (!session) {
+    res.statusCode = 403;
+    return { props: { user: null } };
+  }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: params?.id.toString(),
+      id: session.userId,
     },
     include: {
       technologies: {
@@ -31,7 +36,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   });
   return {
-    props: { user },
+    props: user,
   };
 };
 

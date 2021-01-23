@@ -5,6 +5,7 @@ import prisma from "../../lib/prisma";
 import { useSession } from "next-auth/client";
 import Router, { useRouter } from "next/router";
 import { User } from "@prisma/client";
+import { UserProps } from "../../components/User";
 
 export async function getStaticPaths() {
   const users = await prisma.user.findMany();
@@ -39,7 +40,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-const UserPage: React.FC<User> = (props) => {
+const UserPage: React.FC<UserProps> = (props) => {
   const [session, loading] = useSession();
   // if (loading) {
   //   return <div>Authenticating ...</div>;
@@ -55,7 +56,23 @@ const UserPage: React.FC<User> = (props) => {
   return (
     <Layout>
       <div>
-        <h2>{props.name}</h2>
+        <h1>{props.name}</h1>
+        <p>Goal: {props.broadGoal}</p>
+        <p>{props.email}</p>
+        <p>{props.timeToLearn}</p>
+        <ul>
+          {props.technologies.map((tech) => (
+            <li>{tech.name}</li>
+          ))}
+        </ul>
+        <ul>
+          {props.goals.map((goal) => (
+            <li>
+              {goal.title} | {goal.createdAt} | {goal.achieved} |{" "}
+              {goal.achievedAt}
+            </li>
+          ))}
+        </ul>
       </div>
     </Layout>
   );

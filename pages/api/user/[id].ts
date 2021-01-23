@@ -7,7 +7,7 @@ export default async function handle(req, res) {
   const userId: string = req.query.id;
 
   const session = await getSession({ req });
-  // Check if session id is same as user id
+  // TODO: Check if session id is same as user id
 
   const post = await prisma.user.update({
     where: { id: userId },
