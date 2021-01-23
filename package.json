@@ -1,5 +1,5 @@
 {
-  "name": "hello-next",
+  "name": "nerd-goals",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -8,8 +8,7 @@
     "start": "next start"
   },
   "keywords": [],
-  "author": "",
-  "license": "MIT",
+  "author": "Matt Gregg <mattdgregg@gmail.com>",
   "dependencies": {
     "@prisma/client": "2.15.0",
     "@types/react": "^17.0.0",
