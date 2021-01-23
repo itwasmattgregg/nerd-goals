@@ -1,6 +1,5 @@
 import React from "react";
 import { GetStaticProps } from "next";
-import ReactMarkdown from "react-markdown";
 import Layout from "../../components/Layout";
 import prisma from "../../lib/prisma";
 import { useSession } from "next-auth/client";
@@ -18,7 +17,7 @@ export async function getStaticPaths() {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: Number(params?.id) || -1,
+      id: params?.id.toString(),
     },
     include: {
       technologies: {

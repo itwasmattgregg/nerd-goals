@@ -7,15 +7,8 @@ import UserComponent from "../components/User";
 
 export const getStaticProps: GetStaticProps = async () => {
   const users = await prisma.user.findMany();
-  // const users = usersFromDatabase.map((user) => {
-  //   return {
-  //     ...user,
-  //     createdAt: user.createdAt.toString(),
-  //     updatedAt: user.updatedAt.toString(),
-  //   };
-  // });
 
-  return { props: { users }, revalidate: 1 };
+  return { props: { users }, revalidate: 60 };
 };
 
 type Props = {

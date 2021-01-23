@@ -13,7 +13,7 @@ interface Values {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: Number(params?.id) || -1,
+      id: params?.id.toString(),
     },
     include: {
       technologies: {
