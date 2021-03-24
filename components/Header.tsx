@@ -140,7 +140,7 @@ const Header: React.FC = () => {
     );
     right = (
       <div className="right">
-        <Link href={`/user/${session.userId}`}>
+        <Link href={`/profile`}>
           <a>
             {session.user.name} ({session.user.email})
           </a>
