@@ -16,7 +16,7 @@
     "autoprefixer": "^10.2.1",
     "formik": "^2.2.6",
     "next": "^10.0.5",
-    "next-auth": "^v3.2.0-canary.23",
+    "next-auth": "^v3.29.10",
     "nprogress": "^0.2.0",
     "postcss": "^8.2.4",
     "react": "^17.0.1",
